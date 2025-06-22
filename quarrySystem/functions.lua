@@ -34,6 +34,10 @@ local function waitForMessage(correctMessage)
             end
         until message == correctMessage
         print("Received correct message")
+        return true
+    else
+        printError("Modem not found")
+        return false
     end
 end
 

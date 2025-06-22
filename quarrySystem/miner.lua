@@ -1,9 +1,5 @@
 local functions = require("functions")
 
-local columnToMine = 4
-local startColumn = 1
-local enableFilter = true
-
 local function mineDoubleColumn()
     local blockMoved = 0
     turtle.digDown()
@@ -106,6 +102,10 @@ local function mineToBedrock(startColumn, columnToMine, enableFilter)
 end
 
 local function mineRoom(startHeight, height, depth)
+    if depth > 250 then
+        printError("Depth is more than 250")
+        return false
+    end
     for i = startHeight, height, 2 do
         while not functions.checkFuel() do
             print("Load fuel and press Enter")
@@ -130,10 +130,12 @@ local function mineRoom(startHeight, height, depth)
         end
     end
     putItemsInChest(enableFilter)
+    return true
 end
 -- Main funtion
 do
-    functions.waitForMessage("start_mining")
-    -- mineToBedrock(startColumn, columnToMine, enableFilter)
-    mineRoom(1, 3, 4)
+    if functions.waitForMessage("start_mining") then
+        -- mineToBedrock(1, 16, true)
+        mineRoom(1, 3, 4)
+    end
 end
