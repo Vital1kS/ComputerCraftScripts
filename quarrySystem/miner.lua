@@ -36,6 +36,7 @@ local function mineDoubleRow(depth)
         turtle.digDown()
         turtle.back()
     end
+    turtle.digDown()
 end
 local function mineRow(depth)
     local blockMoved = 0
@@ -141,5 +142,7 @@ while true do
         else
             mineRoom(message[2], message[3], message[4])
         end
+    else
+        break
     end
 end
