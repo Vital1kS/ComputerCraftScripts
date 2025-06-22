@@ -107,8 +107,9 @@ end
 
 local function mineRoom(startHeight, height, depth)
     for i = startHeight, height, 2 do
-        if not functions.checkFuel() then
-            break
+        while not functions.checkFuel() do
+            print("Load fuel and press Enter")
+            read()
         end
         if not putItemsInChest(enableFilter) then
             break

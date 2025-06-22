@@ -13,7 +13,7 @@ local function checkFuel()
                 turtle.refuel(itemsInSlot - 1)
             end
             if turtle.getFuelLevel() < 500 then
-                printError("Fuel level is lower than safe 500 points")
+                printError(("Fuel level is lower than safe 500 points, currentLevel: %d"):format(turtle.getFuelLevel()))
                 return false
             end
         end
