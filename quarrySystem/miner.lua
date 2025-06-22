@@ -133,9 +133,13 @@ local function mineRoom(startHeight, height, depth)
     return true
 end
 -- Main funtion
-do
-    if functions.waitForMessage("start_mining") then
-        -- mineToBedrock(1, 16, true)
-        mineRoom(1, 3, 4)
+while true do
+    local message = functions.waitForMessage("vitalik_net")
+    if message ~= nil then
+        if message[1] == 0 then
+            mineToBedrock(message[2], message[3], message[4])
+        else
+            mineRoom(message[2], message[3], message[4])
+        end
     end
 end

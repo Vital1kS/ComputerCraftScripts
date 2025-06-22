@@ -22,22 +22,18 @@ local function checkFuel()
     return true
 end
 
-local function waitForMessage(correctMessage)
+local function waitForMessage(correctProtocol)
     peripheral.find("modem", rednet.open)
     if rednet.isOpen() then
         print("Rednet is connected")
         print("Waiting for message...")
         repeat
-            sender_id, message, protocol = rednet.receive()
-            if message ~= correctMessage then
-                print("Received wrong message, continue waiting...")
-            end
-        until message == correctMessage
-        print("Received correct message")
-        return true
+            sender_id, message, protocol = rednet.receive("vitalik_net")
+            return message
+        until protocol == correctPprotocol
     else
         printError("Modem not found")
-        return false
+        return nil
     end
 end
 
